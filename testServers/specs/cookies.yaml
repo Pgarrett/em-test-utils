@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Cookie Service API
+  version: 1.0.0
+paths:
+  /get-cookies:
+    get:
+      summary: Get Cookies
+      responses:
+        '200':
+          description: Returns cookies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cookies:
+                    type: object
+                    additionalProperties:
+                      type: string
+  /set-cookies:
+    post:
+      summary: Set Cookies
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      responses:
+        '200':
+          description: Sets cookies and returns a confirmation message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string

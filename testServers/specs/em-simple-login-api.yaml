@@ -1,0 +1,86 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: em-simple-login-api
+  description: A Simple Login API to test with EvoMaster
+servers:
+  - url: http://localhost:30345
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        acccess_token:
+          type: string
+        name:
+          type: string
+        age:
+          type: integer
+          format: int64
+    GeneralError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+  responses:
+    Unauthorized:
+      description: Invalid username or password
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GeneralError"
+    InvalidToken:
+      description: Invalid token
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GeneralError"
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
+    token_auth:
+      type: http
+      scheme: bearer
+paths: 
+  /login:
+    post:
+      description: Login to the API
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        '401':
+          description: Invalid username or password
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+      security:
+        - basic_auth: []
+  # /useMe:
+  #   get:
+  #     description: Use of the API with the provided token
+  #     parameters:
+  #       - name: Authorization
+  #         in: header
+  #         required: true
+  #         schema:
+  #           type: string
+  #     responses:
+  #       '200':
+  #         description: Welcome screen
+  #       '401':
+  #         description: Invalid token
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/GeneralError"
+  #     security:
+  #       - token_auth: []

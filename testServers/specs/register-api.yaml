@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: File Server API
+  description: API for managing files and user registration
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Local development server
+paths:
+  /me:
+    get:
+      summary: Get user information by ID
+      parameters:
+        - name: id
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Me'
+        '400':
+          description: User not found or missing ID parameter
+  /register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+      responses:
+        '201':
+          description: User registered successfully
+        '200':
+          description: ID already existed
+        '400':
+          description: Missing ID or name in request body
+        '403':
+          description: Missing data
+  components:
+    schemas:
+      Me:
+        description: User information retrieved successfully
+        type: object
+        properites:
+          id:
+            type: number
+            description: numero de id enviado
+            example: 450
