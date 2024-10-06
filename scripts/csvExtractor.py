@@ -4,7 +4,8 @@ import csv
 from collections import defaultdict
 
 # Directory to analyze
-results_dir = '../results/'
+results_dir = '../results'
+
 
 # Regex to find test case names
 test_case_pattern = re.compile(r'test_(\d+)_(\w+)')
@@ -24,8 +25,8 @@ api_type_mapping = {
 }
 
 # CSV output fields
-csv_file = results_dir + 'testCaseNames.csv'
-csv_columns = ['API', 'executionMode', 'technology', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'apiType', 'isNameRepeated']
+csv_file = results_dir + '/testCaseNames.csv'
+csv_columns = ['API', 'apiType', 'executionMode', 'technology', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'isNameRepeated']
 
 def get_api_type(api):
     """Determine the API type based on the API name."""
@@ -58,10 +59,10 @@ def analyze_directory(root_dir):
     for subdir, _, files in os.walk(root_dir):
         # Check if we are in the right directory level containing test files
         parts = subdir.split(os.sep)
-        if len(parts) >= 5:
-            API = parts[1]  # API is the first directory after outputTest
-            executionMode = parts[3]  # executionMode is under action
-            technology = parts[4]  # technology is the last directory level
+        if len(parts) >= 6:
+            API = parts[2]  # API is the first directory after outputTest
+            executionMode = parts[4]  # executionMode is under action
+            technology = parts[5]  # technology is the last directory level
             
             # Get the API type
             api_type = get_api_type(API)
@@ -85,13 +86,13 @@ def analyze_directory(root_dir):
                             is_repeated = test_descriptions.count(test_description) > 1
                             csv_data.append({
                                 'API': API,
+                                'apiType': api_type,
                                 'executionMode': executionMode,
                                 'technology': technology,
                                 'fileName': file_name,
                                 'fullTestName': full_test_name,
                                 'testNameLength': test_name_length,
                                 'testDescription': test_description,
-                                'apiType': api_type,
                                 'isNameRepeated': is_repeated
                             })
 
