@@ -26,7 +26,7 @@ api_type_mapping = {
 
 # CSV output fields
 csv_file = results_dir + '/testCaseNames.csv'
-csv_columns = ['API', 'apiType', 'executionMode', 'technology', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'isNameRepeated']
+csv_columns = ['API', 'apiType', 'executionMode', 'technology', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'isNameRepeated', 'descriptionCount']
 
 def get_api_type(api):
     """Determine the API type based on the API name."""
@@ -93,7 +93,8 @@ def analyze_directory(root_dir):
                                 'fullTestName': full_test_name,
                                 'testNameLength': test_name_length,
                                 'testDescription': test_description,
-                                'isNameRepeated': is_repeated
+                                'isNameRepeated': is_repeated,
+                                'descriptionCount': test_descriptions.count(test_description)
                             })
 
     # Write data to CSV
