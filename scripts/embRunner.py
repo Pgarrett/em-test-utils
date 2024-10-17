@@ -38,12 +38,14 @@ bb_jars_and_names = [
 technologies = ["python", "js", "java"]
 output_formats = {"python": "PYTHON_UNITTEST", "js": "JS_JEST", "java": "JAVA_JUNIT_4"}
 
-base_path = "../../"
+# base_path = "../../"
+base_path = "/run/datad/facultad/tesis/"
 emb_base_path = base_path + "EMB/jdk_8_maven/"
 output_base_path = base_path + "em-thesis-utils/results"
 em_jar = base_path + "EvoMaster/core/target/evomaster.jar"
 
-testBb = True
+testBb = False
+testWb = True
 
 if testBb:
     # Loop through each JAR and name in BB
@@ -79,6 +81,7 @@ if testBb:
                 print(f"Running: {em_to_run}")
                 subprocess.run(em_to_run)
                 print("\n============================================================\n\n")
+                time.sleep(3)
 
             # Step 4: Run Python unittests
             # python_dir = os.path.join(dir_path, "python")
@@ -131,53 +134,55 @@ wb_jars_and_names = [
 ]
 
 # test whitebox
-for entry in wb_jars_and_names:
-    jar = entry["jar"]
-    name = entry["name"]
+if testWb:
+    for entry in wb_jars_and_names:
+        jar = entry["jar"]
+        name = entry["name"]
 
-    print(f"Testing WB: {name}")
+        print(f"Testing WB: {name}")
 
-    controller_args = ["java", "-jar", emb_base_path + "em/external" + jar, "40100", "8090", emb_base_path + "cs/" + entry["sutJarPath"]]
-    print(f"Executing controller: {controller_args}")
+        controller_args = ["java", "-jar", emb_base_path + "em/external" + jar, "40100", "8090", emb_base_path + "cs/" + entry["sutJarPath"]]
+        print(f"Executing controller: {controller_args}")
 
-    # Step 1: Run the JAR without inheriting its IO
-    process = subprocess.Popen(controller_args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # Step 1: Run the JAR without inheriting its IO
+        process = subprocess.Popen(controller_args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    time.sleep(10)
-    
-    try:
-        # Step 2: Create directories
-        dir_path = os.path.join(output_base_path, name + "/action/wb")        
+        time.sleep(3)
         
-        problem_type_args = []
-        if entry["type"] == "rest":
-            problem_type_args = ["--problemType", "REST"]
-        elif entry["type"] == "graphql":
-            problem_type_args = ["--problemType", "GRAPHQL"]
-        else:
-            problem_type_args = ["--problemType", "RPC"]
-        
-        base_params = ["--maxTime", "10m"] + problem_type_args
-
-        target_directory = os.path.join(dir_path, "java")
-        os.makedirs(target_directory, exist_ok=True)
-        print(f"EvoMaster to generate: JAVA_JUNIT_4\n")
-        execution_params = base_params + ["--outputFormat", "JAVA_JUNIT_4", "--outputFolder", target_directory, "--namingStrategy", "ACTION"]
-        em_to_run = ["java", "-jar", em_jar] + execution_params
-        print(f"Running: {em_to_run}")
-        subprocess.run(em_to_run)
-        print("\n============================================================\n\n")
-
-        print("\n************************************************************")
-        print("************************************************************\n\n")
-
-        os.chdir(base_path)
-
-    
-    finally:
-        # Ensure the initial JAR process is terminated at the end of the iteration
-        process.terminate()
         try:
-            process.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            process.kill()
+            # Step 2: Create directories
+            dir_path = os.path.join(output_base_path, name + "/action/wb")        
+            
+            problem_type_args = []
+            if entry["type"] == "rest":
+                problem_type_args = ["--problemType", "REST"]
+            elif entry["type"] == "graphql":
+                problem_type_args = ["--problemType", "GRAPHQL"]
+            else:
+                problem_type_args = ["--problemType", "RPC"]
+            
+            base_params = ["--maxTime", "10m"] + problem_type_args
+
+            target_directory = os.path.join(dir_path, "java")
+            os.makedirs(target_directory, exist_ok=True)
+            print(f"EvoMaster to generate: JAVA_JUNIT_4\n")
+            execution_params = base_params + ["--outputFormat", "JAVA_JUNIT_4", "--outputFolder", target_directory, "--namingStrategy", "ACTION"]
+            em_to_run = ["java", "-jar", em_jar] + execution_params
+            print(f"Running: {em_to_run}")
+            subprocess.run(em_to_run)
+            print("\n============================================================\n\n")
+            time.sleep(10)
+
+            print("\n************************************************************")
+            print("************************************************************\n\n")
+
+            os.chdir(base_path)
+
+        
+        finally:
+            # Ensure the initial JAR process is terminated at the end of the iteration
+            process.terminate()
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                process.kill()
