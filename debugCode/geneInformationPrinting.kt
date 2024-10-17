@@ -4,19 +4,30 @@ lines.addSingleCommentLine("\tActions:")
 test.test.individual.seeAllActions().forEach { ac ->
     lines.addSingleCommentLine("\t\t${ac.javaClass.kotlin.qualifiedName}: ${ac.getName()}")
     lines.addSingleCommentLine("\t\t\tAction parameters:")
-    (ac as ApiWsAction).parameters.forEach { acParam ->
-        lines.addSingleCommentLine("\t\t\t\t${acParam.name}: '${acParam.primaryGene().getValueAsRawString()}'")
+    if (ac is ApiWsAction) {
+        ac.parameters.forEach { acParam ->
+            lines.addSingleCommentLine(
+                "\t\t\t\t${acParam.name}: '${
+                    acParam.primaryGene().getValueAsRawString()
+                }'"
+            )
+        }
+    } else if (ac is SqlAction) {
+        lines.addSingleCommentLine("\t\t\t\t${ac.getResolvedName()}")
     }
     lines.addSingleCommentLine("\t\t\tGenes:")
     ac.seeTopGenes().forEach { gene ->
-        lines.addSingleCommentLine("\t\t\t\t${gene.javaClass.kotlin.qualifiedName} = ${gene.getVariableName()}:${gene.getValueAsRawString()}")
+        try {
+            lines.addSingleCommentLine("\t\t\t\t${gene.javaClass.kotlin.qualifiedName} = ${gene.getVariableName()}:'${gene.getValueAsRawString()}'")
+        } catch (e: Exception) {
+            lines.appendSingleCommentLine("\t\t\t\tError trying to print ${gene.javaClass.kotlin.qualifiedName} information: ${e.localizedMessage}")
+        }
     }
 }
 lines.addSingleCommentLine("\tEvaluated Actions:")
 test.test.evaluatedMainActions().forEach { eAc ->
     lines.addSingleCommentLine("\t\t${eAc.action.javaClass.kotlin.qualifiedName}: ${eAc.action.getName()}")
 }
-
 
 
 

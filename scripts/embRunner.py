@@ -35,7 +35,8 @@ bb_jars_and_names = [
     {"jar": "graphql/graphql-scs/target/graphql-scs-sut.jar", "name": "graphql-scs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"}
 ]
 
-technologies = ["python", "js", "java"]
+# technologies = ["python", "js", "java"]
+technologies = ["java"]
 output_formats = {"python": "PYTHON_UNITTEST", "js": "JS_JEST", "java": "JAVA_JUNIT_4"}
 
 # base_path = "../../"
@@ -44,7 +45,7 @@ emb_base_path = base_path + "EMB/jdk_8_maven/"
 output_base_path = base_path + "em-thesis-utils/results"
 em_jar = base_path + "EvoMaster/core/target/evomaster.jar"
 
-testBb = False
+testBb = True
 testWb = True
 
 if testBb:
