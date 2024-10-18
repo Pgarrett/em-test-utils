@@ -259,7 +259,7 @@ public class EvoMaster_others_Test {
     // 	Evaluated Actions:
     // 		org.evomaster.core.problem.rest.RestCallAction: GET:/languages
     @Test(timeout = 60000)
-    public void test_3_getOn/LanguagesReturns400UsingSql() throws Exception {
+    public void test_3_getOnLanguagesReturns400UsingSql() throws Exception {
         List<InsertionDto> insertions = sql().insertInto("CONTRIBUTOR", 41L)
                 .d("ID", "632")
                 .d("ORGANIZATION_ID", "707")
@@ -1282,7 +1282,7 @@ public class EvoMaster_others_Test {
     // 	Evaluated Actions:
     // 		org.evomaster.core.problem.rest.RestCallAction: GET:/contributors
     @Test(timeout = 60000)
-    public void test_22_getOn/ContributorsReturns403() throws Exception {
+    public void test_22_getOnContributorsReturns403() throws Exception {
         
         given().accept("application/json")
                 .header("x-EMextraHeader123", "")
@@ -1352,7 +1352,7 @@ public class EvoMaster_others_Test {
     // 	Evaluated Actions:
     // 		org.evomaster.core.problem.rest.RestCallAction: GET:/languages
     @Test(timeout = 60000)
-    public void test_24_getOn/LanguagesReturns403() throws Exception {
+    public void test_24_getOnLanguagesReturns403() throws Exception {
         
         given().accept("application/json")
                 .header("x-EMextraHeader123", "42")

@@ -72,7 +72,7 @@ catwatch,rest,wb,java,EvoMaster_successes_Test.java,test_10_getOnProjectsReturns
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_0_getOnFetchReturnsNull,28,getOnFetchReturnsNull,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_1_getOnProjectsReturns400UsingSql,38,getOnProjectsReturns400UsingSql,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_2_getOnDeleteReturns400,28,getOnDeleteReturns400,False,1
-catwatch,rest,wb,java,EvoMaster_others_Test.java,test_3_getOn,12,getOn,True,3
+catwatch,rest,wb,java,EvoMaster_others_Test.java,test_3_getOnLanguagesReturns400UsingSql,39,getOnLanguagesReturns400UsingSql,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_4_getOnFetchReturns400,27,getOnFetchReturns400,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_5_postOnImportReturns400UsingSql,37,postOnImportReturns400UsingSql,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_6_getOnContributorsReturns400,34,getOnContributorsReturns400,False,1
@@ -91,9 +91,9 @@ catwatch,rest,wb,java,EvoMaster_others_Test.java,test_18_getOnFetchReturns403,28
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_19_getOnStatisticsReturns403,33,getOnStatisticsReturns403,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_20_getOnInitReturns403,27,getOnInitReturns403,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_21_getOnProjectsReturns403UsingSql,39,getOnProjectsReturns403UsingSql,False,1
-catwatch,rest,wb,java,EvoMaster_others_Test.java,test_22_getOn,13,getOn,True,3
+catwatch,rest,wb,java,EvoMaster_others_Test.java,test_22_getOnContributorsReturns403,35,getOnContributorsReturns403,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_23_getOnConfigReturns403,29,getOnConfigReturns403,False,1
-catwatch,rest,wb,java,EvoMaster_others_Test.java,test_24_getOn,13,getOn,True,3
+catwatch,rest,wb,java,EvoMaster_others_Test.java,test_24_getOnLanguagesReturns403,32,getOnLanguagesReturns403,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_25_getOnDeleteReturns403,29,getOnDeleteReturns403,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_26_getOnExportReturns403,29,getOnExportReturns403,False,1
 catwatch,rest,wb,java,EvoMaster_others_Test.java,test_27_postOnImportReturns403,30,postOnImportReturns403,False,1
