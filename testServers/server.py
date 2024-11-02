@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 # Set the directory path
-directory = '/run/datad/facultad/tesis/apiSpecServer/specs/'
+directory = '/run/datad/facultad/tesis/em-thesis-utils/testServers/specs/'
 
 db = {}
 

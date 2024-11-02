@@ -35,7 +35,8 @@ bb_jars_and_names = [
     {"jar": "graphql/graphql-scs/target/graphql-scs-sut.jar", "name": "graphql-scs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"}
 ]
 
-technologies = ["python", "js", "java"]
+# technologies = ["python", "js", "java"]
+technologies = ["python"]
 output_formats = {"python": "PYTHON_UNITTEST", "js": "JS_JEST", "java": "JAVA_JUNIT_4"}
 
 # base_path = "../../"
@@ -44,8 +45,8 @@ emb_base_path = base_path + "EMB/jdk_8_maven/"
 output_base_path = base_path + "em-thesis-utils/results"
 em_jar = base_path + "EvoMaster/core/target/evomaster.jar"
 
-testBb = False
-testWb = True
+testBb = True
+testWb = False
 
 if testBb:
     # Loop through each JAR and name in BB
@@ -84,12 +85,12 @@ if testBb:
                 time.sleep(3)
 
             # Step 4: Run Python unittests
-            # python_dir = os.path.join(dir_path, "python")
-            # print("Executing python tests\n")
-            # py_to_run = ["python3", "-m", "unittest", "discover", "-s", python_dir, "-p", "*_Test.py"]
-            # print(f"Running: {py_to_run}\n")
-            # subprocess.run(py_to_run)
-            # print("\n============================================================\n\n")
+            python_dir = os.path.join(dir_path, "python")
+            print("Executing python tests\n")
+            py_to_run = ["python3", "-m", "unittest", "discover", "-s", python_dir, "-p", "*_Test.py"]
+            print(f"Running: {py_to_run}\n")
+            subprocess.run(py_to_run)
+            print("\n============================================================\n\n")
 
             # # Step 5: Run npm tests
             # js_dir = os.path.join(dir_path, "js")
