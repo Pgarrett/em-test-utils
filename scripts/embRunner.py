@@ -36,7 +36,7 @@ bb_jars_and_names = [
 ]
 
 # technologies = ["python", "js", "java"]
-technologies = ["python"]
+technologies = ["java"]
 output_formats = {"python": "PYTHON_UNITTEST", "js": "JS_JEST", "java": "JAVA_JUNIT_4"}
 
 # base_path = "../../"
@@ -71,7 +71,7 @@ if testBb:
             else:
                 problem_type_args = ["--problemType", "GRAPHQL", "--bbTargetUrl", entry["targetUrl"]]
             
-            base_params = ["--blackBox", "true", "--maxTime", "10m", "--ratePerMinute", "60"] + problem_type_args
+            base_params = ["--blackBox", "true", "--maxTime", "15m", "--ratePerMinute", "60"] + problem_type_args
 
             for technology in technologies:
                 target_directory = os.path.join(dir_path, technology)
@@ -85,12 +85,12 @@ if testBb:
                 time.sleep(3)
 
             # Step 4: Run Python unittests
-            python_dir = os.path.join(dir_path, "python")
-            print("Executing python tests\n")
-            py_to_run = ["python3", "-m", "unittest", "discover", "-s", python_dir, "-p", "*_Test.py"]
-            print(f"Running: {py_to_run}\n")
-            subprocess.run(py_to_run)
-            print("\n============================================================\n\n")
+            # python_dir = os.path.join(dir_path, "python")
+            # print("Executing python tests\n")
+            # py_to_run = ["python3", "-m", "unittest", "discover", "-s", python_dir, "-p", "*_Test.py"]
+            # print(f"Running: {py_to_run}\n")
+            # subprocess.run(py_to_run)
+            # print("\n============================================================\n\n")
 
             # # Step 5: Run npm tests
             # js_dir = os.path.join(dir_path, "js")
@@ -162,7 +162,7 @@ if testWb:
             else:
                 problem_type_args = ["--problemType", "RPC"]
             
-            base_params = ["--maxTime", "10m"] + problem_type_args
+            base_params = ["--maxTime", "15m"] + problem_type_args
 
             target_directory = os.path.join(dir_path, "java")
             os.makedirs(target_directory, exist_ok=True)
