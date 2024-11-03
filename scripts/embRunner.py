@@ -46,7 +46,7 @@ output_base_path = base_path + "em-thesis-utils/results"
 em_jar = base_path + "EvoMaster/core/target/evomaster.jar"
 
 testBb = True
-testWb = False
+testWb = True
 
 if testBb:
     # Loop through each JAR and name in BB
