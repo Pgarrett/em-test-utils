@@ -71,7 +71,7 @@ if testBb:
             else:
                 problem_type_args = ["--problemType", "GRAPHQL", "--bbTargetUrl", entry["targetUrl"]]
             
-            base_params = ["--blackBox", "true", "--maxTime", "15m", "--ratePerMinute", "60"] + problem_type_args
+            base_params = ["--blackBox", "true", "--maxTime", "10m", "--ratePerMinute", "60"] + problem_type_args
 
             for technology in technologies:
                 target_directory = os.path.join(dir_path, technology)
@@ -162,7 +162,7 @@ if testWb:
             else:
                 problem_type_args = ["--problemType", "RPC"]
             
-            base_params = ["--maxTime", "15m"] + problem_type_args
+            base_params = ["--maxTime", "10m"] + problem_type_args
 
             target_directory = os.path.join(dir_path, "java")
             os.makedirs(target_directory, exist_ok=True)
