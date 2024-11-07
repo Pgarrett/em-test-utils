@@ -4,7 +4,9 @@ import csv
 from collections import defaultdict
 
 # Directory to analyze
-results_dir = '../results'
+results_dir = ''
+results_disamb = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/disambiguated'
+results_amb = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/ambiguous'
 
 
 # Regex to find test case names
@@ -20,12 +22,14 @@ file_extensions = {
 # API type mappings
 api_type_mapping = {
     'rest': ['session-service', 'features-service', 'rest-news', 'rest-ncs', 'rest-scs', 'catwatch'],
-    'rpc': ['rpc-ncs', 'thrift-scs', 'rpc-scs', 'thrift-ncs'],
-    'graphql': ['graphql-scs', 'graphql-ncs', 'petclinic-graphql']
+    # 'rpc': ['rpc-ncs', 'thrift-scs', 'rpc-scs', 'thrift-ncs'],
+    # 'graphql': ['graphql-scs', 'graphql-ncs', 'petclinic-graphql']
 }
 
 # CSV output fields
-csv_file = results_dir + '/testCaseNames.csv'
+res_home = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results'
+amb_csv_file = res_home + '/ambiguousNames.csv'
+disamb_csv_file = res_home + '/disambiguatedNames.csv'
 csv_columns = ['API', 'apiType', 'executionMode', 'technology', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'isNameRepeated', 'descriptionCount']
 
 def get_api_type(api):
@@ -48,7 +52,14 @@ def extract_test_cases(file_path, technology):
                 test_cases.append((full_test_name, len(full_test_name), test_description))
     return test_cases
 
-def analyze_directory(root_dir):
+def analyze_directory(root_dir, amb):
+    csv_file = ''
+    if amb:
+        root_dir = results_amb
+        csv_file = amb_csv_file
+    else:
+        root_dir = results_disamb
+        csv_file = disamb_csv_file
     # List to store CSV data
     csv_data = []
     
@@ -59,10 +70,11 @@ def analyze_directory(root_dir):
     for subdir, _, files in os.walk(root_dir):
         # Check if we are in the right directory level containing test files
         parts = subdir.split(os.sep)
-        if len(parts) >= 6:
-            API = parts[2]  # API is the first directory after outputTest
-            executionMode = parts[4]  # executionMode is under action
-            technology = parts[5]  # technology is the last directory level
+        # print(parts)
+        if len(parts) >= 13:
+            API = parts[9]  # API is the first directory after outputTest
+            executionMode = parts[11]  # executionMode is under action
+            technology = parts[12]  # technology is the last directory level
             
             # Get the API type
             api_type = get_api_type(API)
@@ -104,6 +116,7 @@ def analyze_directory(root_dir):
         writer.writerows(csv_data)
 
 # Run the analysis
-analyze_directory(results_dir)
+analyze_directory(results_dir, True)
+analyze_directory(results_dir, False)
 
-print(f"CSV file '{csv_file}' generated successfully.")
+# print(f"CSV file '{csv_file}' generated successfully.")
