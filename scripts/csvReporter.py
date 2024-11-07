@@ -69,15 +69,17 @@ def group_by_api_and_description_by_type(data):
     seen_rows = set()  # To track unique rows by API:fileName:testDescription
     
     for row in data:
-        api_type = row['apiType']
+        execution_mode = row['executionMode']
         api = row['API']
         file_name = row['fileName']
         test_description = row['testDescription']
-        unique_key = (api, file_name, test_description)
+        unique_key = (api, execution_mode, file_name, test_description)
         
         if unique_key not in seen_rows:
             descCount = int(row['descriptionCount'])
-            grouped_data_by_type[api_type][api][(file_name, test_description)] += descCount
+            grouped_data_by_type[execution_mode][api][(file_name, test_description)] += descCount
+            # if api == "catwatch" and execution_mode == "wb":
+            #     print(f"For API: {api} of execution_mode: {execution_mode}. For({file_name},{test_description}) there are  {grouped_data_by_type[execution_mode][api][(file_name, test_description)]} tests")
             seen_rows.add(unique_key)
     
     return grouped_data_by_type
@@ -101,10 +103,8 @@ def print_api_descriptions_with_count(grouped_data_by_type):
 
 def print_api_descriptions_with_count_per_api_type(grouped_data_by_type):
     """Print the total descriptionCount for each unique API:fileName:testDescription combination."""
-    for api_type, apis in grouped_data_by_type.items():
-        if api_type != "rest":
-            continue
-        print(f"API Type: {api_type}")
+    for execution_mode, apis in grouped_data_by_type.items():
+        print(f"\nExecution Mode: {execution_mode}")
         counts = []
         sumCounts = 0
         for api, descriptions in apis.items():
