@@ -120,6 +120,7 @@ def print_api_descriptions_with_count_per_api_type(grouped_data_by_type):
             print(f"\t{api}:")
             print(f"\t\tTotal tests: {perApiSumCounts}")
             print(f"\t\tTotal repeated tests: {sum(perApiCounts)}")
+            print(f"\t\tPercentage of repeated tests: {(sum(perApiCounts)*100)/perApiSumCounts}")
         
         # print(f"\t\tRepeated list: {counts}")
         print(f"\n\tTotal tests: {sumCounts}")
