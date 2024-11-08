@@ -4,6 +4,10 @@ java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomast
     java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/disambQP/rest-scs/action/wb/java --namingStrategy ACTION --problemType REST
     java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/disambQP/rest-news/action/wb/java --namingStrategy ACTION --problemType REST
     java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/disambQP/session-service/action/wb/java --namingStrategy ACTION --problemType REST
-    java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/disambQP/graphql-scs/action/wb/java --namingStrategy ACTION --problemType GRAPHQL
-    java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/disambQP/graphql-ncs/action/wb/java --namingStrategy ACTION --problemType GRAPHQL
-    java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/disambQP/petclinic-graphql/action/wb/java --namingStrategy ACTION --problemType GRAPHQL
+    
+    
+
+
+    java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/graphql/graphql-scs/action/wb/java --namingStrategy ACTION --problemType GRAPHQL
+    java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/graphql/graphql-ncs/action/wb/java --namingStrategy ACTION --problemType GRAPHQL
+    java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/graphql/petclinic-graphql/action/wb/java --namingStrategy ACTION --problemType GRAPHQL
