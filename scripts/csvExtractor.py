@@ -7,6 +7,8 @@ from collections import defaultdict
 results_dir = ''
 results_disamb = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/disambiguated'
 results_amb = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/ambiguous'
+results_graphql = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/graphql'
+results_rpc = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/rpc'
 
 
 # Regex to find test case names
@@ -22,14 +24,16 @@ file_extensions = {
 # API type mappings
 api_type_mapping = {
     'rest': ['session-service', 'features-service', 'rest-news', 'rest-ncs', 'rest-scs', 'catwatch'],
-    # 'rpc': ['rpc-ncs', 'thrift-scs', 'rpc-scs', 'thrift-ncs'],
-    # 'graphql': ['graphql-scs', 'graphql-ncs', 'petclinic-graphql']
+    'rpc': ['rpc-ncs', 'thrift-scs', 'rpc-scs', 'thrift-ncs'],
+    'graphql': ['graphql-scs', 'graphql-ncs', 'petclinic-graphql']
 }
 
 # CSV output fields
 res_home = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results'
 amb_csv_file = res_home + '/ambiguousNames.csv'
 disamb_csv_file = res_home + '/disambiguatedNames.csv'
+graphql_csv_file = res_home + '/graphqlNames.csv'
+rpc_csv_file = res_home + '/rpcNames.csv'
 csv_columns = ['API', 'apiType', 'executionMode', 'technology', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'isNameRepeated', 'descriptionCount']
 
 def get_api_type(api):
@@ -52,14 +56,7 @@ def extract_test_cases(file_path, technology):
                 test_cases.append((full_test_name, len(full_test_name), test_description))
     return test_cases
 
-def analyze_directory(root_dir, amb):
-    csv_file = ''
-    if amb:
-        root_dir = results_amb
-        csv_file = amb_csv_file
-    else:
-        root_dir = results_disamb
-        csv_file = disamb_csv_file
+def analyze_directory(root_dir, csv_file):
     # List to store CSV data
     csv_data = []
     
@@ -116,7 +113,9 @@ def analyze_directory(root_dir, amb):
         writer.writerows(csv_data)
 
 # Run the analysis
-analyze_directory(results_dir, True)
-analyze_directory(results_dir, False)
+# analyze_directory(results_amb, amb_csv_file)    # ambiguous
+# analyze_directory(results_disamb, disamb_csv_file)   # disambiguated
+analyze_directory(results_dir, graphql_csv_file)   # graphql
+analyze_directory(results_dir, rpc_csv_file)   # rpc
 
 # print(f"CSV file '{csv_file}' generated successfully.")
