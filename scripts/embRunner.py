@@ -24,15 +24,15 @@ import shutil
 
 # Define the list of JAR files and corresponding names
 bb_jars_and_names = [
-    {"jar": "rest/original/features-service/target/features-service-sut.jar", "name": "features-service", "type": "rest", "targetUrl": "http://localhost:8080/swagger.json"},
+    # {"jar": "rest/original/features-service/target/features-service-sut.jar", "name": "features-service", "type": "rest", "targetUrl": "http://localhost:8080/swagger.json"},
     {"jar": "rest/original/catwatch/catwatch-backend/target/catwatch-sut.jar", "name": "catwatch", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
-    {"jar": "rest/artificial/ncs/target/rest-ncs-sut.jar", "name": "rest-ncs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
-    {"jar": "rest/artificial/scs/target/rest-scs-sut.jar", "name": "rest-scs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
+    # {"jar": "rest/artificial/ncs/target/rest-ncs-sut.jar", "name": "rest-ncs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
+    # {"jar": "rest/artificial/scs/target/rest-scs-sut.jar", "name": "rest-scs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
     {"jar": "rest/artificial/news/target/rest-news-sut.jar", "name": "rest-news", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
-    {"jar": "rest/original/session-service/target/session-service-sut.jar", "name": "session-service", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
-    {"jar": "graphql/petclinic-graphql/target/petclinic-graphql-sut.jar", "name": "petclinic-graphql", "type": "graphql", "targetUrl": "http://localhost:9977/graphql"},
-    {"jar": "graphql/graphql-ncs/target/graphql-ncs-sut.jar", "name": "graphql-ncs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"},
-    {"jar": "graphql/graphql-scs/target/graphql-scs-sut.jar", "name": "graphql-scs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"}
+    {"jar": "rest/original/session-service/target/session-service-sut.jar", "name": "session-service", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"}
+    # {"jar": "graphql/petclinic-graphql/target/petclinic-graphql-sut.jar", "name": "petclinic-graphql", "type": "graphql", "targetUrl": "http://localhost:9977/graphql"},
+    # {"jar": "graphql/graphql-ncs/target/graphql-ncs-sut.jar", "name": "graphql-ncs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"},
+    # {"jar": "graphql/graphql-scs/target/graphql-scs-sut.jar", "name": "graphql-scs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"}
 ]
 
 # technologies = ["python", "js", "java"]
@@ -42,11 +42,11 @@ output_formats = {"python": "PYTHON_UNITTEST", "js": "JS_JEST", "java": "JAVA_JU
 # base_path = "../../"
 base_path = "/run/datad/facultad/tesis/"
 emb_base_path = base_path + "EMB/jdk_8_maven/"
-output_base_path = base_path + "em-thesis-utils/results"
+output_base_path = base_path + "em-thesis-utils/results/queryParamsExp"
 em_jar = base_path + "EvoMaster/core/target/evomaster.jar"
 
 testBb = True
-testWb = True
+testWb = False
 
 if testBb:
     # Loop through each JAR and name in BB
@@ -71,13 +71,13 @@ if testBb:
             else:
                 problem_type_args = ["--problemType", "GRAPHQL", "--bbTargetUrl", entry["targetUrl"]]
             
-            base_params = ["--blackBox", "true", "--maxTime", "10m", "--ratePerMinute", "60"] + problem_type_args
+            base_params = ["--blackBox", "true", "--maxTime", "15m", "--ratePerMinute", "60"] + problem_type_args
 
             for technology in technologies:
                 target_directory = os.path.join(dir_path, technology)
                 os.makedirs(target_directory, exist_ok=True)
                 print(f"EvoMaster to generate: {output_formats[technology]}\n")
-                execution_params = base_params + ["--outputFormat", output_formats[technology], "--outputFolder", target_directory, "--namingStrategy", "ACTION"]
+                execution_params = base_params + ["--outputFormat", output_formats[technology], "--outputFolder", target_directory, "--namingStrategy", "ACTION", "--nameWithQueryParameters", "true"]
                 em_to_run = ["java", "-jar", em_jar] + execution_params
                 print(f"Running: {em_to_run}")
                 subprocess.run(em_to_run)
@@ -133,6 +133,8 @@ wb_jars_and_names = [
     # {"jar": "/graphql/graphql-ncs/target/graphql-ncs-evomaster-runner.jar", "name": "graphql-ncs", "type": "graphql", "sutJarPath": "graphql/graphql-ncs/target"},
     # {"jar": "/graphql/graphql-scs/target/graphql-scs-evomaster-runner.jar", "name": "graphql-scs", "type": "graphql", "sutJarPath": "graphql/graphql-scs/target"},
 ]
+
+output_base_path = base_path + "em-thesis-utils/results/rpc"
 
 # test whitebox
 if testWb:
