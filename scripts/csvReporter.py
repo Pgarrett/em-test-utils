@@ -142,6 +142,8 @@ def process_and_print(file_path):
 path_to_files = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results'
 disamb_path = path_to_files + '/disambiguatedNames.csv'
 amb_path = path_to_files + '/ambiguousNames.csv'
+graphql_path = path_to_files + '/graphqlNames.csv'
+rpc_path = path_to_files + '/rpcNames.csv'
 
 if not len(sys.argv) > 1:
     print("Wrong usage, missing parameters")
@@ -154,6 +156,8 @@ if args[1] == "testQty":
     print(disamb_output)
     print(amb_output)
 elif args[1] == "printDuplicates":
+    # process_and_print(graphql_path)
+    # process_and_print(rpc_path)
     process_and_print(amb_path)
     process_and_print(disamb_path)
 else:
