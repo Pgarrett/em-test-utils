@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: Simple Number and Echo API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /number/random:
+    get:
+      summary: Returns a random number.
+      responses:
+        '200':
+          description: A random number in a JSON object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  random_number:
+                    type: number
+  /number/next:
+    get:
+      summary: Returns the next number.
+      parameters:
+        - name: n
+          in: query
+          description: An optional integer value to find the next number.
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The next number in a JSON object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next_number:
+                    type: number
+  /echo:
+    get:
+      summary: Echoes the given string in different formats.
+      parameters:
+        - name: text
+          in: query
+          description: An optional text to echo back.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The echoed result in JSON format.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    oneOf:
+                      - type: string
+                      - type: array
+                        items:
+                          type: string
