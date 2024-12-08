@@ -20,10 +20,9 @@ def download_file(filename):
     else:
         return f'File {filename} not found', 404
 
-@app.route('/number/random', methods=['GET'])
-def random_number():
-    random_num = random.random()
-    return jsonify({"random_number": random_num})
+@app.route('/number/ten', methods=['GET'])
+def number_ten():
+    return jsonify({"number_ten": 10})
 
 @app.route('/number/next', methods=['GET'])
 def next_number():

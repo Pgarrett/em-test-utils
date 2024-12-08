@@ -5,18 +5,18 @@ info:
 servers:
   - url: http://localhost:5000
 paths:
-  /number/random:
+  /number/ten:
     get:
-      summary: Returns a random number.
+      summary: Returns number ten.
       responses:
         '200':
-          description: A random number in a JSON object.
+          description: Number ten in a JSON object.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  random_number:
+                  number_ten:
                     type: number
   /number/next:
     get:
