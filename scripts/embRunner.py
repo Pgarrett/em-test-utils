@@ -24,10 +24,10 @@ import shutil
 
 # Define the list of JAR files and corresponding names
 bb_jars_and_names = [
-    # {"jar": "rest/original/features-service/target/features-service-sut.jar", "name": "features-service", "type": "rest", "targetUrl": "http://localhost:8080/swagger.json"},
+    {"jar": "rest/original/features-service/target/features-service-sut.jar", "name": "features-service", "type": "rest", "targetUrl": "http://localhost:8080/swagger.json"},
     {"jar": "rest/original/catwatch/catwatch-backend/target/catwatch-sut.jar", "name": "catwatch", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
-    # {"jar": "rest/artificial/ncs/target/rest-ncs-sut.jar", "name": "rest-ncs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
-    # {"jar": "rest/artificial/scs/target/rest-scs-sut.jar", "name": "rest-scs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
+    {"jar": "rest/artificial/ncs/target/rest-ncs-sut.jar", "name": "rest-ncs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
+    {"jar": "rest/artificial/scs/target/rest-scs-sut.jar", "name": "rest-scs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
     {"jar": "rest/artificial/news/target/rest-news-sut.jar", "name": "rest-news", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
     {"jar": "rest/original/session-service/target/session-service-sut.jar", "name": "session-service", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"}
     # {"jar": "graphql/petclinic-graphql/target/petclinic-graphql-sut.jar", "name": "petclinic-graphql", "type": "graphql", "targetUrl": "http://localhost:9977/graphql"},
