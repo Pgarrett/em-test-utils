@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Set the directory path
-directory = '/run/datad/facultad/tesis/em-thesis-utils/liveDemo/server'
+directory = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/liveDemo/server'
 
 @app.route('/')
 def index():

@@ -6,7 +6,7 @@ import time
 import shutil
 
 
-base_path = "/run/datad/facultad/tesis/"
+base_path = "/Users/pgarrett/Documents/facultad/tesis/"
 output_base_path = base_path + "em-thesis-utils/liveDemo/results"
 em_jar = base_path + "EvoMaster/core/target/evomaster.jar"
 copy_path = base_path + "em-thesis-utils/bkpLiveDemo"
@@ -46,7 +46,7 @@ shutil.copytree(copy_path + resultsPath, output_base_path + resultsPath)
 
 # Step 4: Run Python unittests
 print("Executing python tests\n")
-py_to_run = ["python3", "-m", "unittest", "discover", "-s", output_base_path + resultsPath, "-p", "*_Test.py"]
+py_to_run = ["python3.9", "-m", "unittest", "discover", "-s", output_base_path + resultsPath, "-p", "*_Test.py"]
 print(f"Running: {py_to_run}\n")
 subprocess.run(py_to_run)
 
