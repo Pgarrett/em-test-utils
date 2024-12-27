@@ -36,7 +36,7 @@ disamb_csv_file = res_home + '/disambiguatedNames.csv'
 graphql_csv_file = res_home + '/graphqlNames.csv'
 rpc_csv_file = res_home + '/rpcNames.csv'
 queryParamsExp_csv_file = res_home + '/queryParamsExpNames.csv'
-csv_columns = ['API', 'apiType', 'executionMode', 'technology', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'isNameRepeated', 'descriptionCount']
+csv_columns = ['API', 'executionMode', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'isNameRepeated', 'descriptionCount']
 
 def get_api_type(api):
     """Determine the API type based on the API name."""
@@ -97,9 +97,7 @@ def analyze_directory(root_dir, csv_file):
                             is_repeated = test_descriptions.count(test_description) > 1
                             csv_data.append({
                                 'API': API,
-                                'apiType': api_type,
                                 'executionMode': executionMode,
-                                'technology': technology,
                                 'fileName': file_name,
                                 'fullTestName': full_test_name,
                                 'testNameLength': test_name_length,

@@ -32,6 +32,16 @@ java.lang.IllegalStateException: incorrect insertion execution results (1) which
     java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/scout-api/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
 
 
+	java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/jdk11/cwa-verification/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+	java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/market/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+	java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/pay-publicapi/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+
+java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/familie-ba-sak/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/familie-tilbake/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/signal-server/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/tiltaksgjennomforing-api/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+
+
 
 
 java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 10m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/graphql/graphql-scs/action/wb/java --namingStrategy ACTION --problemType GRAPHQL
