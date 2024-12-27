@@ -28,8 +28,8 @@ java.lang.IllegalStateException: incorrect insertion execution results (1) which
 
 
 
-java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/restcountries/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
-java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/scout-api/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+    java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/restcountries/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
+    java -jar /Users/pgarrett/Documents/facultad/tesis/EvoMaster/core/target/evomaster.jar --maxTime 15m --outputFormat JAVA_JUNIT_4 --outputFolder /Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp/scout-api/action/wb/java --namingStrategy ACTION --problemType REST --nameWithQueryParameters true
 
 
 
