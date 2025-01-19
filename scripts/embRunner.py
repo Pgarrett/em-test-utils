@@ -29,20 +29,19 @@ bb_jars_and_names = [
     {"jar": "rest/artificial/ncs/target/rest-ncs-sut.jar", "name": "rest-ncs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
     {"jar": "rest/artificial/scs/target/rest-scs-sut.jar", "name": "rest-scs", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
     {"jar": "rest/artificial/news/target/rest-news-sut.jar", "name": "rest-news", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
-    {"jar": "rest/original/session-service/target/session-service-sut.jar", "name": "session-service", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"}
-    # {"jar": "graphql/petclinic-graphql/target/petclinic-graphql-sut.jar", "name": "petclinic-graphql", "type": "graphql", "targetUrl": "http://localhost:9977/graphql"},
-    # {"jar": "graphql/graphql-ncs/target/graphql-ncs-sut.jar", "name": "graphql-ncs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"},
-    # {"jar": "graphql/graphql-scs/target/graphql-scs-sut.jar", "name": "graphql-scs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"}
+    {"jar": "rest/original/session-service/target/session-service-sut.jar", "name": "session-service", "type": "rest", "targetUrl": "http://localhost:8080/v2/api-docs"},
+    {"jar": "graphql/petclinic-graphql/target/petclinic-graphql-sut.jar", "name": "petclinic-graphql", "type": "graphql", "targetUrl": "http://localhost:9977/graphql"},
+    {"jar": "graphql/graphql-ncs/target/graphql-ncs-sut.jar", "name": "graphql-ncs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"},
+    {"jar": "graphql/graphql-scs/target/graphql-scs-sut.jar", "name": "graphql-scs", "type": "graphql", "targetUrl": "http://localhost:8080/graphql"}
 ]
 
 # technologies = ["python", "js", "java"]
 technologies = ["java"]
 output_formats = {"python": "PYTHON_UNITTEST", "js": "JS_JEST", "java": "JAVA_JUNIT_4"}
 
-# base_path = "../../"
-base_path = "/run/datad/facultad/tesis/"
+base_path = "/Users/pgarrett/evoMaster/"
 emb_base_path = base_path + "EMB/jdk_8_maven/"
-output_base_path = base_path + "em-thesis-utils/results/queryParamsExp"
+output_base_path = base_path + "em-thesis-utils/results/sorting"
 em_jar = base_path + "EvoMaster/core/target/evomaster.jar"
 
 testBb = True
@@ -77,7 +76,7 @@ if testBb:
                 target_directory = os.path.join(dir_path, technology)
                 os.makedirs(target_directory, exist_ok=True)
                 print(f"EvoMaster to generate: {output_formats[technology]}\n")
-                execution_params = base_params + ["--outputFormat", output_formats[technology], "--outputFolder", target_directory, "--namingStrategy", "ACTION", "--nameWithQueryParameters", "true"]
+                execution_params = base_params + ["--outputFormat", output_formats[technology], "--outputFolder", target_directory, "--namingStrategy", "ACTION", "--nameWithQueryParameters", "true", "--testCaseSortingStrategy", "TARGET_INCREMENTAL"]
                 em_to_run = ["java", "-jar", em_jar] + execution_params
                 print(f"Running: {em_to_run}")
                 subprocess.run(em_to_run)
@@ -119,10 +118,10 @@ if testBb:
 
 
 wb_jars_and_names = [
-    {"jar": "/grpc/ncs/target/rpc-grpc-ncs-evomaster-runner.jar", "name": "rpc-ncs", "type": "rpc", "sutJarPath": "rpc/grpc/artificial/grpc-ncs/target"},
-    {"jar": "/grpc/scs/target/rpc-grpc-scs-evomaster-runner.jar", "name": "rpc-scs", "type": "rpc", "sutJarPath": "rpc/grpc/artificial/grpc-scs/target"},
+    # {"jar": "/grpc/ncs/target/rpc-grpc-ncs-evomaster-runner.jar", "name": "rpc-ncs", "type": "rpc", "sutJarPath": "rpc/grpc/artificial/grpc-ncs/target"},
+    # {"jar": "/grpc/scs/target/rpc-grpc-scs-evomaster-runner.jar", "name": "rpc-scs", "type": "rpc", "sutJarPath": "rpc/grpc/artificial/grpc-scs/target"},
     {"jar": "/thrift/ncs/target/rpc-thrift-ncs-evomaster-runner.jar", "name": "thrift-ncs", "type": "rpc", "sutJarPath": "rpc/thrift/artificial/thrift-ncs/target"},
-    {"jar": "/thrift/scs/target/rpc-thrift-scs-evomaster-runner.jar", "name": "thrift-scs", "type": "rpc", "sutJarPath": "rpc/thrift/artificial/thrift-scs/target"},
+    {"jar": "/thrift/scs/target/rpc-thrift-scs-evomaster-runner.jar", "name": "thrift-scs", "type": "rpc", "sutJarPath": "rpc/thrift/artificial/thrift-scs/target"}
     # {"jar": "/rest/features-service/target/features-service-evomaster-runner.jar", "name": "features-service", "type": "rest", "sutJarPath": "rest/original/features-service/target"},
     # {"jar": "/rest/catwatch/target/catwatch-evomaster-runner.jar", "name": "catwatch", "type": "rest", "sutJarPath": "rest/original/catwatch/catwatch-backend/target"},
     # {"jar": "/rest/ncs/target/rest-ncs-evomaster-runner.jar", "name": "rest-ncs", "type": "rest", "sutJarPath": "rest/artificial/ncs/target"},
@@ -169,7 +168,7 @@ if testWb:
             target_directory = os.path.join(dir_path, "java")
             os.makedirs(target_directory, exist_ok=True)
             print(f"EvoMaster to generate: JAVA_JUNIT_4\n")
-            execution_params = base_params + ["--outputFormat", "JAVA_JUNIT_4", "--outputFolder", target_directory, "--namingStrategy", "ACTION"]
+            execution_params = base_params + ["--outputFormat", "JAVA_JUNIT_4", "--outputFolder", target_directory, "--namingStrategy", "ACTION", "--testCaseSortingStrategy", "TARGET_INCREMENTAL"]
             em_to_run = ["java", "-jar", em_jar] + execution_params
             print(f"Running: {em_to_run}")
             subprocess.run(em_to_run)
