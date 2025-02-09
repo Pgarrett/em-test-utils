@@ -5,10 +5,6 @@ from collections import defaultdict
 
 # Directory to analyze
 results_dir = ''
-results_disamb = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/disambiguated'
-results_amb = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/ambiguous'
-results_graphql = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/graphql'
-results_rpc = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/rpc'
 results_queryParamsExp = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results/queryParamsExp'
 
 
@@ -31,10 +27,6 @@ api_type_mapping = {
 
 # CSV output fields
 res_home = '/Users/pgarrett/Documents/facultad/tesis/em-thesis-utils/results'
-amb_csv_file = res_home + '/ambiguousNames.csv'
-disamb_csv_file = res_home + '/disambiguatedNames.csv'
-graphql_csv_file = res_home + '/graphqlNames.csv'
-rpc_csv_file = res_home + '/rpcNames.csv'
 queryParamsExp_csv_file = res_home + '/queryParamsExpNames.csv'
 csv_columns = ['API', 'executionMode', 'fileName', 'fullTestName', 'testNameLength', 'testDescription', 'isNameRepeated', 'descriptionCount']
 
@@ -113,10 +105,6 @@ def analyze_directory(root_dir, csv_file):
         writer.writerows(csv_data)
 
 # Run the analysis
-# analyze_directory(results_amb, amb_csv_file)    # ambiguous
-# analyze_directory(results_disamb, disamb_csv_file)   # disambiguated
-# analyze_directory(results_graphql, graphql_csv_file)   # graphql
-# analyze_directory(results_rpc, rpc_csv_file)   # rpc
 analyze_directory(results_queryParamsExp, queryParamsExp_csv_file)   # queryParamsExp
 
 # print(f"CSV file '{csv_file}' generated successfully.")
