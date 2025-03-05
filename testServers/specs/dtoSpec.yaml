@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: Simple DTO API
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /object:
+    post:
+      summary: Receives a Person object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Person"
+      responses:
+        "200":
+          description: Successfully received object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/Person"
+  /array:
+    post:
+      summary: Receives an array of Person objects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Person"
+      responses:
+        "200":
+          description: Successfully received array
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Person"
+  /string:
+    post:
+      summary: Receives a string
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        "200":
+          description: Successfully received string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: string
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+        address:
+          $ref: "#/components/schemas/Address"
+      required:
+        - name
+        - age
+        - address
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        country:
+          type: string
+        voted:
+          type: boolean
+      required:
+        - street
+        - country
