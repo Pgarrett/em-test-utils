@@ -51,27 +51,27 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Person"
-  /string:
-    post:
-      summary: Receives a string
-      requestBody:
-        required: true
-        content:
-          text/plain:
-            schema:
-              type: string
-      responses:
-        "200":
-          description: Successfully received string
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  data:
-                    type: string
+  # /string:
+  #   post:
+  #     summary: Receives a string
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         text/plain:
+  #           schema:
+  #             type: string
+  #     responses:
+  #       "200":
+  #         description: Successfully received string
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: string
 components:
   schemas:
     Person:

@@ -40,3 +40,5 @@ def handle_string():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# java -jar /run/datad/evoMaster/EvoMaster/core/target/evomaster.jar --blackBox true --maxTime 1m --ratePerMinute 60 --bbSwaggerUrl http://localhost:5000/dtoSpec.yaml --outputFormat JAVA_JUNIT_4 --outputFolder /run/datad/evoMaster/em-test-utils/results/dto-in-test --dtoForRequestPayload true
