@@ -16,3 +16,11 @@
 # Pending tests
 * Source code generation of getters and setters. Could be a unit test
 * E2E tests to evaluate successful compilation
+
+
+# Detected bugs
+1. No body param still tries to generate dto. [FIXED]
+2. Duplicate variable names in the same test case.
+3. DTO instantiated with the key name: `Key dto_Key_3 = new Key()` when it should have been: `ContributorKey dto_Key_3 = new ContributorKey()`.
+4. For `Long` values, add `L` as last char in the number.
+5. Add imports for lists in DTO classes.
