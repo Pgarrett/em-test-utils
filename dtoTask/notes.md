@@ -24,3 +24,10 @@
 3. DTO instantiated with the key name: `Key dto_Key_3 = new Key()` when it should have been: `ContributorKey dto_Key_3 = new ContributorKey()`.
 4. For `Long` values, add `L` as last char in the number.
 5. Add imports for lists in DTO classes.
+
+
+# DTO Enabled for certain classes
+The following classes use `EnumGene`, which is pending implementation:
+1. SwaggerDescriptionEMTest
+2. SSRFBaseEMTest
+3. SSRFBaseDisableEMTest
