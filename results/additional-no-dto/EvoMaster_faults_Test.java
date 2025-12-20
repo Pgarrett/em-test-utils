@@ -96,5 +96,26 @@ public class EvoMaster_faults_Test {
                 .contentType("text/html");
     }
 
+    // @Test @Timeout(60)
+    // fun test_1_postOnAdditional_properties_inlineReturnsMismatchResponseWithSchema()  {
+        
+    //     // Fault101. Received A Response From API With A Structure/Data That Is Not Matching Its Schema. Type: validation.response.status.unknown. Response status 200 not defined for path '/additional-properties-inline'.
+    //     given().accept("*/*")
+    //             .header("x-EMextraHeader123", "_EM_3_XYZ_")
+    //             .contentType("application/json")
+    //             .body(" { " + 
+    //                 " \"stringProp\": \"sgTqPBwBBSF_\", " + 
+    //                 " \"ktH4n7Qd86z\": { " + 
+    //                 " \"value\": \"_EM_0_XYZ_\" " + 
+    //                 " } " + 
+    //                 " } ")
+    //             .post("${baseUrlOfSut}/additional-properties-inline?EMextraParam123=_EM_2_XYZ_")
+    //             .then()
+    //             .statusCode(200)
+    //             .assertThat()
+    //             .contentType("text/plain")
+    //             .body(containsString("OK"))
+    // }
+
 
 }
