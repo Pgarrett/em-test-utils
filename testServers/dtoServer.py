@@ -38,7 +38,29 @@ def handle_string():
     data = request.data.decode("utf-8")
     return jsonify({"message": "Received string", "data": data}), 200
 
+@app.route("/enum-examples", methods=["POST"])
+def handle_enum_examples():
+    data = request.get_json()
+    print(f"Received: {data}")
+
+    return jsonify({"message": "Received enum examples", "data": data}), 200
+
+@app.route("/users", methods=["POST"])
+def handle_users():
+    data = request.get_json()
+    print(f"Received: {data}")
+
+    return jsonify({"message": "Received enum examples", "data": data}), 200
+
+@app.route('/login', methods=['POST'])
+def post_login():
+    data = request.get_json()
+    
+    if data['username'] == 'ph' and data['password'] == 'admin':
+        return jsonify({'token': '123'}), 200
+    return 'Login error', 401
+
 if __name__ == "__main__":
     app.run(debug=True)
 
-# java -jar /run/datad/evoMaster/EvoMaster/core/target/evomaster.jar --blackBox true --maxTime 1m --ratePerMinute 60 --bbSwaggerUrl http://localhost:5000/dtoSpec.yaml --outputFormat JAVA_JUNIT_4 --outputFolder /run/datad/evoMaster/em-test-utils/results/dto-in-test --dtoForRequestPayload true
+# java -jar /run/datad/evoMaster/EvoMaster/core/target/evomaster.jar --blackBox true --maxTime 1m --ratePerMinute 60 --bbSwaggerUrl http://localhost:5000/dtoSpec.yaml --outputFormat JAVA_JUNIT_4 --outputFolder /run/datad/evoMaster/em-test-utils/results/dataset-dto/dto-server/src/test/java --dtoForRequestPayload true

@@ -1,0 +1,31 @@
+openapi: 3.0.3
+info:
+  title: Attribute Update API
+  version: 1.0.0
+paths:
+  /additionalProperties:
+    post:
+      summary: Update additionalProperties
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stringProp:
+                  type: string
+              additionalProperties:
+                type: object
+                required:
+                  - value
+                properties:
+                  value:
+                    type: string
+                  source:
+                    type: string
+              required:
+                - stringProp
+      responses:
+        '204':
+          description: Attributes updated
