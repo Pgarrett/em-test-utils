@@ -63,10 +63,6 @@ public class EvoMaster_faults_Test {
     
     
     
-    
-    
-    
-    
     /**
     * Calls:
     * (405) POST:/additionalProperties
@@ -76,12 +72,53 @@ public class EvoMaster_faults_Test {
     public void test_0_postOnAdditionalPropertiesReturnsMismatchResponseWithSchema() throws Exception {
         
         // Fault101. Received A Response From API With A Structure/Data That Is Not Matching Its Schema. Type: validation.response.status.unknown. Response status 405 not defined for path '/additionalProperties'.
-        POST__additionalProperties dto_POST__additionalProperties_1 = new POST__additionalProperties();
-        dto_POST__additionalProperties_1.setStringprop("P6if_DqOL5ua");
-        
         given().accept("*/*")
                 .contentType("application/json")
-                .body(dto_POST__additionalProperties_1)
+                .body(" { " + 
+                    " \"stringProp\": \"Cl6RovoHeKawa\", " + 
+                    " \"\": { " + 
+                    " \"value\": \"j5Rg\" " + 
+                    " }, " + 
+                    " \"i\": { " + 
+                    " \"value\": \"uSqaTr\", " + 
+                    " \"source\": \"X\" " + 
+                    " }, " + 
+                    " \"vgL4BoaKoWz\": { " + 
+                    " \"value\": \"_2HX5U_vxuis\" " + 
+                    " } " + 
+                    " } ")
+                .post(baseUrlOfSut + "/additionalProperties")
+                .then()
+                .statusCode(405)
+                .assertThat()
+                .contentType("text/html");
+    }
+    
+    /**
+    * Calls:
+    * (405) POST:/additionalProperties
+    * Found 1 potential fault of type-code 101
+    */
+    @Test(timeout = 60000)
+    public void test_1_postOnAdditionalPropertiesReturnsMismatchResponseWithSchema() throws Exception {
+
+        POST__additionalProperties dto = new POST__additionalProperties();
+        dto.setStringprop("Cl6RovoHeKawa");
+        POST__additionalProperties_ap val1 = new POST__additionalProperties_ap();
+        val1.setValue("j5Rg");
+        dto.addAdditionalProperty("", val1);
+        POST__additionalProperties_ap val2 = new POST__additionalProperties_ap();
+        val2.setValue("uSqaTr");
+        val2.setSource("X");
+        dto.addAdditionalProperty("i", val2);
+        POST__additionalProperties_ap val3 = new POST__additionalProperties_ap();
+        val3.setValue("_2HX5U_vxuis");
+        dto.addAdditionalProperty("vgL4BoaKoWz", val3);
+        
+        // Fault101. Received A Response From API With A Structure/Data That Is Not Matching Its Schema. Type: validation.response.status.unknown. Response status 405 not defined for path '/additionalProperties'.
+        given().accept("*/*")
+                .contentType("application/json")
+                .body(dto)
                 .post(baseUrlOfSut + "/additionalProperties")
                 .then()
                 .statusCode(405)

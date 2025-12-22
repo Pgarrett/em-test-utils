@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class _1ieiphnz_yi8ek {
+public class POST__additionalProperties_ap {
 
     @JsonProperty("value")
     private Optional<String> value;
