@@ -32,6 +32,29 @@ configs:  {} # remove this {} when specifying properties
 ### Different types of authentication mechanisms can be configured here.
 ### For more information, read: https://github.com/EMResearch/EvoMaster/blob/master/docs/auth.md
 
+# auth:
+#   - name: foo
+#     loginEndpointAuth:
+#       payloadRaw: "{\"username\": \"foo\", \"password\": \"123\"}"
+#   - name: bar
+#     loginEndpointAuth:
+#       payloadUserPwd:
+#         username: bar
+#         password: "456"
+#         usernameField: username
+#         passwordField: password
+
+# authTemplate:
+#   loginEndpointAuth:
+#     endpoint: /login
+#     verb: POST
+#     contentType: application/json
+#     expectCookies: false
+#     token: 
+#       extractFromField: token
+#       httpHeaderName: Authorization
+#       headerPrefix: Bearer
+
 #auth:
 #  - name: ?
 #    fixedHeaders:

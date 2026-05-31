@@ -38,29 +38,51 @@ def handle_string():
     data = request.data.decode("utf-8")
     return jsonify({"message": "Received string", "data": data}), 200
 
-@app.route("/enum-examples", methods=["POST"])
-def handle_enum_examples():
-    data = request.get_json()
-    print(f"Received: {data}")
+# @app.route("/enum-examples", methods=["POST"])
+# def handle_enum_examples():
+#     data = request.get_json()
+#     print(f"Received: {data}")
 
-    return jsonify({"message": "Received enum examples", "data": data}), 200
+#     return jsonify({"message": "Received enum examples", "data": data}), 200
 
-@app.route("/users", methods=["POST"])
-def handle_users():
-    data = request.get_json()
-    print(f"Received: {data}")
+# @app.route("/users", methods=["POST"])
+# def handle_users():
+#     data = request.get_json()
+#     print(f"Received: {data}")
 
-    return jsonify({"message": "Received enum examples", "data": data}), 200
+#     return jsonify({"message": "Received enum examples", "data": data}), 200
 
-@app.route('/login', methods=['POST'])
-def post_login():
-    data = request.get_json()
+# @app.route('/login', methods=['POST'])
+# def post_login():
+#     data = request.get_json()
     
-    if data['username'] == 'ph' and data['password'] == 'admin':
-        return jsonify({'token': '123'}), 200
-    return 'Login error', 401
+#     if data['username'] == 'ph' and data['password'] == 'admin':
+#         return jsonify({'token': '123'}), 200
+#     return 'Login error', 401
+
+# @app.route("/additional-properties-ref", methods=["POST"])
+# def handle_additional_properties_ref():
+#     data = request.get_json()
+#     print(f"Received: {data}")
+
+#     # return jsonify({"message": "Received handle_additional_properties_ref", "data": data}), 200
+#     return jsonify({"response": "OK"}), 200
+
+# @app.route("/additional-properties-no-root", methods=["POST"])
+# def handle_additional_properties_no_root():
+#     data = request.get_json()
+#     print(f"Received: {data}")
+
+#     return jsonify({"response": "OK"}), 200
+
+# @app.route("/additional-properties-inline", methods=["POST"])
+# def handle_additional_properties_inline():
+#     data = request.get_json()
+#     print(f"Received: {data}")
+
+#     return jsonify({"message": "Received handle_additional_properties_inline", "data": data}), 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, ssl_context='adhoc')
 
 # java -jar /run/datad/evoMaster/EvoMaster/core/target/evomaster.jar --blackBox true --maxTime 1m --ratePerMinute 60 --bbSwaggerUrl http://localhost:5000/dtoSpec.yaml --outputFormat JAVA_JUNIT_4 --outputFolder /run/datad/evoMaster/em-test-utils/results/dataset-dto/dto-server/src/test/java --dtoForRequestPayload true

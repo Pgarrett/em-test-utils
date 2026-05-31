@@ -3,7 +3,7 @@ info:
   title: Simple DTO API
   version: 1.0.0
 servers:
-  - url: http://localhost:5000
+  - url: https://localhost:5000
 paths:
   /object:
     post:
@@ -51,27 +51,39 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Person"
-  # /string:
+  /string:
+    post:
+      summary: Receives a string
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        "200":
+          description: Successfully received string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: string
+  # /enum-examples:
   #   post:
-  #     summary: Receives a string
+  #     summary: Submit an object using examples
   #     requestBody:
   #       required: true
   #       content:
-  #         text/plain:
+  #         application/json:
   #           schema:
-  #             type: string
+  #             $ref: '#/components/schemas/EnumExample'
   #     responses:
-  #       "200":
-  #         description: Successfully received string
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 message:
-  #                   type: string
-  #                 data:
-  #                   type: string
+  #       '200':
+  #         description: OK
 components:
   schemas:
     Person:
@@ -99,3 +111,35 @@ components:
       required:
         - street
         - country
+    # EnumExample:
+    #   type: object
+    #   properties:
+    #     textValue:
+    #       type: string
+    #       example: "hello world"
+    #     flagValue:
+    #       type: boolean
+    #       example: true
+    #     countValue:
+    #       type: integer
+    #       example: 33
+    #     longValue:
+    #       type: integer
+    #       format: int64
+    #       example: 10
+    #     scoreValue:
+    #       type: number
+    #       format: float
+    #       example: 3.14
+    #     listValue:
+    #       type: array
+    #       items:
+    #         type: string
+    #       example: [ "s1", "s2", "s3" ]
+    #   required:
+    #     - textValue
+    #     - flagValue
+    #     - longValue
+    #     - countValue
+    #     - scoreValue
+    #     - listValue
