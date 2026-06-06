@@ -1,0 +1,27 @@
+Python:
+* Starting phase WRITE_OUTPUT
+* Going to save 4 tests to /run/datad/evoMaster/em-test-utils/results/llm-initial-test/r6
+* Potential faults: 3
+* Successfully executed (HTTP code 2xx) 3 endpoints out of 3 (100%)
+* Phase WRITE_OUTPUT lasted: 0h 7m 50s
+
+JS:
+* Starting phase WRITE_OUTPUT
+* Going to save 4 tests to /run/datad/evoMaster/em-test-utils/results/llm-initial-test/r7
+* Potential faults: 3
+* Successfully executed (HTTP code 2xx) 3 endpoints out of 3 (100%)
+* Phase WRITE_OUTPUT lasted: 0h 6m 12s
+
+Java:
+* Starting phase WRITE_OUTPUT
+* Going to save 4 tests to /run/datad/evoMaster/em-test-utils/results/llm-initial-test/r9
+* Potential faults: 3
+* Successfully executed (HTTP code 2xx) 3 endpoints out of 3 (100%)
+* Phase WRITE_OUTPUT lasted: 0h 7m 5s
+
+Deterministic:
+* Starting phase WRITE_OUTPUT
+* Going to save 4 tests to /run/datad/evoMaster/em-test-utils/results/llm-initial-test/r8
+* Potential faults: 3
+* Successfully executed (HTTP code 2xx) 3 endpoints out of 3 (100%)
+* Phase WRITE_OUTPUT lasted: 0h 0m 0s

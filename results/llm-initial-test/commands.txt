@@ -1,0 +1,44 @@
+# EM Run
+java -jar /run/datad/evoMaster/EvoMaster/core/target/evomaster.jar \
+  --blackBox true \
+  --maxTime 1m \
+  --ratePerMinute 60 \
+  --bbSwaggerUrl https://localhost:5000/dtoSpec.yaml \
+  --outputFormat JAVA_JUNIT_4 \
+  --outputFolder /run/datad/evoMaster/em-test-utils/results/llm-initial-test/r2 \
+  --dtoForRequestPayload true \
+  --namingStrategy LLM \
+  --llm true \
+  --llmName deepseek-r1:7b \
+  --llmURL http://localhost:11434 \
+  --llmTimeoutSeconds 300
+
+
+# Ollama setup
+docker pull ollama/ollama:latest
+docker stop ollama
+docker rm ollama
+docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+
+
+# Pull models
+## Lightweight (1.5B) - good for low-resource machines
+docker exec -it ollama ollama pull deepseek-r1:1.5b
+
+## Mid-size (7B) - good balance
+docker exec -it ollama ollama pull deepseek-r1:7b
+
+## Larger (14B, 32B, 70B) - needs more RAM/VRAM
+docker exec -it ollama ollama pull deepseek-r1:14b
+
+
+# Run models
+# Interactive chat in terminal
+docker exec -it ollama ollama run deepseek-r1:7b
+
+# Or call via REST API
+curl http://localhost:11434/api/generate -d '{
+  "model": "deepseek-r1:7b",
+  "prompt": "Hello, how are you?",
+  "stream": false
+}'
