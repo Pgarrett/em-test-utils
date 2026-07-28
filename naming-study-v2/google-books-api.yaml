@@ -1,0 +1,600 @@
+openapi: 3.0.3
+info:
+  title: Books API
+  description: >
+    The Google Books API allows clients to access the Google Books repository.
+    Modified for EvoMaster blackbox testing: the `key` query parameter has a
+    hardcoded default value. Replace <YOUR_KEY> below with your actual Google
+    Cloud API key before running EvoMaster.
+  version: v1
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+servers:
+  - url: https://books.googleapis.com/books/v1
+    description: Google Books API production server
+components:
+  parameters:
+    key:
+      name: key
+      in: query
+      description: >
+        API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth
+        2.0 token.
+      required: true
+      schema:
+        type: string
+        default: <YOUR_KEY>
+    country:
+      name: country
+      in: query
+      description: ISO-3166-1 code to override the IP-based country location.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response.
+      schema:
+        type: string
+    prettyPrint:
+      name: prettyPrint
+      in: query
+      description: Returns response with indentations and line breaks.
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      name: quotaUser
+      in: query
+      description: >
+        Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed
+        40 characters.
+      schema:
+        type: string
+  schemas:
+    Volume:
+      type: object
+      properties:
+        kind:
+          type: string
+        id:
+          type: string
+        etag:
+          type: string
+        selfLink:
+          type: string
+        volumeInfo:
+          type: object
+          properties:
+            title:
+              type: string
+            subtitle:
+              type: string
+            authors:
+              type: array
+              items:
+                type: string
+            publisher:
+              type: string
+            publishedDate:
+              type: string
+            description:
+              type: string
+            pageCount:
+              type: integer
+            categories:
+              type: array
+              items:
+                type: string
+            averageRating:
+              type: number
+            ratingsCount:
+              type: integer
+            language:
+              type: string
+        saleInfo:
+          type: object
+          additionalProperties: true
+        accessInfo:
+          type: object
+          additionalProperties: true
+    Volumes:
+      type: object
+      properties:
+        kind:
+          type: string
+        totalItems:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Volume"
+    Bookshelf:
+      type: object
+      properties:
+        kind:
+          type: string
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        access:
+          type: string
+        updated:
+          type: string
+        created:
+          type: string
+        volumeCount:
+          type: integer
+        volumesLastUpdated:
+          type: string
+    Bookshelves:
+      type: object
+      properties:
+        kind:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Bookshelf"
+    Review:
+      type: object
+      properties:
+        kind:
+          type: string
+        author:
+          type: object
+          properties:
+            displayName:
+              type: string
+        content:
+          type: string
+        date:
+          type: string
+        rating:
+          type: string
+        title:
+          type: string
+        source:
+          type: object
+          additionalProperties: true
+paths:
+  /volumes:
+    get:
+      operationId: books.volumes.list
+      summary: Performs a book search.
+      description: Retrieves volumes matching a given search query.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/country"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - $ref: "#/components/parameters/quotaUser"
+        - name: q
+          in: query
+          required: true
+          description: Full-text search query string.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          description: Filter search results.
+          schema:
+            type: string
+            enum: [partial, full, free-ebooks, paid-ebooks, ebooks]
+        - name: langRestrict
+          in: query
+          description: Restrict results to a specified language (ISO-639-1 code).
+          schema:
+            type: string
+        - name: libraryRestrict
+          in: query
+          description: Restrict search to a specified library.
+          schema:
+            type: string
+            enum: [no-restrict, my-library]
+        - name: maxResults
+          in: query
+          description: Maximum number of results to return.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 40
+        - name: orderBy
+          in: query
+          description: Sort search results.
+          schema:
+            type: string
+            enum: [newest, relevance]
+        - name: printType
+          in: query
+          description: Restrict to books or magazines.
+          schema:
+            type: string
+            enum: [all, books, magazines]
+        - name: projection
+          in: query
+          description: Restrict information returned to a set of selected fields.
+          schema:
+            type: string
+            enum: [full, lite]
+        - name: showPreorders
+          in: query
+          description: Set to true to show books available for preorder.
+          schema:
+            type: boolean
+        - name: source
+          in: query
+          description: String to identify the originator of this request.
+          schema:
+            type: string
+        - name: startIndex
+          in: query
+          description: Index of the first result to return (starts at 0).
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volumes"
+
+  /volumes/{volumeId}:
+    get:
+      operationId: books.volumes.get
+      summary: Gets volume information for a single volume.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/country"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - $ref: "#/components/parameters/quotaUser"
+        - name: volumeId
+          in: path
+          required: true
+          description: ID of volume to retrieve.
+          schema:
+            type: string
+        - name: partner
+          in: query
+          description: Brand results for partner ID.
+          schema:
+            type: string
+        - name: projection
+          in: query
+          description: Restrict information returned to a set of selected fields.
+          schema:
+            type: string
+            enum: [full, lite]
+        - name: source
+          in: query
+          description: String to identify the originator of this request.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volume"
+
+  /volumes/mostRecent:
+    get:
+      operationId: books.volumes.mostRecent
+      summary: Returns the current version of the specified volume.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - $ref: "#/components/parameters/quotaUser"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volumes"
+
+  /volumes/{volumeId}/reviews:
+    get:
+      operationId: books.reviews.list
+      summary: Lists reviews for a volume.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - name: volumeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  totalItems:
+                    type: integer
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Review"
+
+  /users/{userId}/bookshelves:
+    get:
+      operationId: books.bookshelves.list
+      summary: Retrieves a list of public bookshelves for the specified user.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - name: userId
+          in: path
+          required: true
+          description: ID of user for whom to retrieve bookshelves.
+          schema:
+            type: string
+        - name: source
+          in: query
+          description: String to identify the originator of this request.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bookshelves"
+
+  /users/{userId}/bookshelves/{shelf}:
+    get:
+      operationId: books.bookshelves.get
+      summary: Retrieves metadata for a specific bookshelf for the specified user.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: shelf
+          in: path
+          required: true
+          description: ID of bookshelf to retrieve.
+          schema:
+            type: string
+        - name: source
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bookshelf"
+
+  /users/{userId}/bookshelves/{shelf}/volumes:
+    get:
+      operationId: books.bookshelves.volumes.list
+      summary: Retrieves volumes in a specific bookshelf for the specified user.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: shelf
+          in: path
+          required: true
+          description: ID of bookshelf to retrieve volumes.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - name: showPreorders
+          in: query
+          schema:
+            type: boolean
+        - name: source
+          in: query
+          schema:
+            type: string
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volumes"
+
+  /mylibrary/bookshelves:
+    get:
+      operationId: books.mylibrary.bookshelves.list
+      summary: Retrieves a list of the logged-in user's bookshelves.
+      description: >
+        Requires an OAuth 2.0 access token (not just an API key), since it
+        operates on the authenticated user's personal library.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - name: source
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bookshelves"
+
+  /mylibrary/bookshelves/{shelf}:
+    get:
+      operationId: books.mylibrary.bookshelves.get
+      summary: Retrieves metadata for a specific bookshelf belonging to the logged-in user.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - name: shelf
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: source
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bookshelf"
+
+  /mylibrary/bookshelves/{shelf}/volumes:
+    get:
+      operationId: books.mylibrary.bookshelves.volumes.list
+      summary: Gets volume information for volumes on a bookshelf.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/prettyPrint"
+        - name: shelf
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: q
+          in: query
+          description: Full-text search query string in this bookshelf.
+          schema:
+            type: string
+        - name: showPreorders
+          in: query
+          schema:
+            type: boolean
+        - name: source
+          in: query
+          schema:
+            type: string
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Volumes"
+
+  /mylibrary/bookshelves/{shelf}/addVolume:
+    post:
+      operationId: books.mylibrary.bookshelves.addVolume
+      summary: Adds a volume to a bookshelf.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - name: shelf
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: volumeId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: reason
+          in: query
+          schema:
+            type: string
+        - name: source
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+
+  /mylibrary/bookshelves/{shelf}/removeVolume:
+    post:
+      operationId: books.mylibrary.bookshelves.removeVolume
+      summary: Removes a volume from a bookshelf.
+      parameters:
+        - $ref: "#/components/parameters/key"
+        - name: shelf
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: volumeId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: reason
+          in: query
+          schema:
+            type: string
+        - name: source
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
