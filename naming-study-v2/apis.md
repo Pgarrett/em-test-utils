@@ -13,6 +13,7 @@ java -jar evomaster.jar --blackBox true \
   --outputFormat JAVA_JUNIT_4 \
   --maxTime 120s \
   --ratePerMinute 30 \
+  --outputFolder /run/datad/evoMaster/em-test-utils/naming-study-v2/initial-test/stripe \
   --header0 "Authorization: Bearer <TEST_SECRET_KEY>"
 ```
 
@@ -38,6 +39,7 @@ java -jar evomaster.jar --blackBox true \
   --outputFormat JAVA_JUNIT_4 \
   --maxTime 120s \
   --ratePerMinute 20 \
+  --outputFolder /run/datad/evoMaster/em-test-utils/naming-study-v2/initial-test/twilio \
   --header0 "Authorization: Basic <BASE64(ACCOUNT_SID:AUTH_TOKEN)>"
 ```
 
@@ -63,6 +65,7 @@ java -jar evomaster.jar --blackBox true \
   --outputFormat JAVA_JUNIT_4 \
   --maxTime 120s \
   --ratePerMinute 30 \
+  --outputFolder /run/datad/evoMaster/em-test-utils/naming-study-v2/initial-test/paypal \
   --header0 "Authorization: Bearer <ACCESS_TOKEN>"
 ```
 
@@ -92,6 +95,7 @@ java -jar evomaster.jar --blackBox true \
   --outputFormat JAVA_JUNIT_4 \
   --maxTime 120s \
   --ratePerMinute 30 \
+  --outputFolder /run/datad/evoMaster/em-test-utils/naming-study-v2/initial-test/spotify \
   --header0 "Authorization: Bearer <ACCESS_TOKEN>"
 ```
 
@@ -118,6 +122,7 @@ java -jar evomaster.jar --blackBox true \
   --bbSwaggerUrl /path/to/local/modified-books-openapi.yaml \
   --outputFormat JAVA_JUNIT_4 \
   --maxTime 60s \
+  --outputFolder /run/datad/evoMaster/em-test-utils/naming-study-v2/initial-test/google \
   --ratePerMinute 30
 ```
 
