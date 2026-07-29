@@ -1,0 +1,470 @@
+openapi: 3.0.3
+info:
+  title: OpenWeatherMap API
+  description: >
+    Access current weather, forecasts, air pollution, and geocoding data from
+    OpenWeatherMap. Modified for EvoMaster blackbox testing: the `appid` query
+    parameter has a hardcoded default value. Replace <YOUR_KEY> below with
+    your actual OpenWeatherMap API key before running EvoMaster.
+  version: "2.5"
+servers:
+  - url: https://api.openweathermap.org
+    description: OpenWeatherMap production server
+components:
+  parameters:
+    appid:
+      name: appid
+      in: query
+      description: Your unique OpenWeatherMap API key.
+      required: true
+      schema:
+        type: string
+        default: <YOUR_KEY>
+    units:
+      name: units
+      in: query
+      description: >
+        Units of measurement. standard, metric, and imperial units are
+        available. If omitted, standard units (Kelvin) are used.
+      schema:
+        type: string
+        enum: [standard, metric, imperial]
+    lang:
+      name: lang
+      in: query
+      description: Language code for the output (e.g. en, es, fr, de).
+      schema:
+        type: string
+    q:
+      name: q
+      in: query
+      description: >
+        City name, optionally with state code and country code, divided by
+        comma. Example: London,GB
+      schema:
+        type: string
+    lat:
+      name: lat
+      in: query
+      description: Latitude coordinate.
+      schema:
+        type: number
+        format: float
+        minimum: -90
+        maximum: 90
+    lon:
+      name: lon
+      in: query
+      description: Longitude coordinate.
+      schema:
+        type: number
+        format: float
+        minimum: -180
+        maximum: 180
+    cityId:
+      name: id
+      in: query
+      description: City ID. See the bulk city list for valid IDs.
+      schema:
+        type: integer
+    zip:
+      name: zip
+      in: query
+      description: Zip/post code, optionally with country code. Example 94040,us
+      schema:
+        type: string
+  schemas:
+    Weather:
+      type: object
+      properties:
+        coord:
+          type: object
+          properties:
+            lon:
+              type: number
+            lat:
+              type: number
+        weather:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              main:
+                type: string
+              description:
+                type: string
+              icon:
+                type: string
+        base:
+          type: string
+        main:
+          type: object
+          properties:
+            temp:
+              type: number
+            feels_like:
+              type: number
+            temp_min:
+              type: number
+            temp_max:
+              type: number
+            pressure:
+              type: integer
+            humidity:
+              type: integer
+        visibility:
+          type: integer
+        wind:
+          type: object
+          properties:
+            speed:
+              type: number
+            deg:
+              type: integer
+            gust:
+              type: number
+        clouds:
+          type: object
+          properties:
+            all:
+              type: integer
+        rain:
+          type: object
+          additionalProperties: true
+        snow:
+          type: object
+          additionalProperties: true
+        dt:
+          type: integer
+        sys:
+          type: object
+          properties:
+            type:
+              type: integer
+            id:
+              type: integer
+            country:
+              type: string
+            sunrise:
+              type: integer
+            sunset:
+              type: integer
+        timezone:
+          type: integer
+        id:
+          type: integer
+        name:
+          type: string
+        cod:
+          type: integer
+    ForecastList:
+      type: object
+      properties:
+        cod:
+          type: string
+        message:
+          type: integer
+        cnt:
+          type: integer
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              dt:
+                type: integer
+              main:
+                type: object
+                additionalProperties: true
+              weather:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+              clouds:
+                type: object
+                additionalProperties: true
+              wind:
+                type: object
+                additionalProperties: true
+              visibility:
+                type: integer
+              pop:
+                type: number
+              sys:
+                type: object
+                additionalProperties: true
+              dt_txt:
+                type: string
+        city:
+          type: object
+          additionalProperties: true
+    AirPollution:
+      type: object
+      properties:
+        coord:
+          type: object
+          properties:
+            lon:
+              type: number
+            lat:
+              type: number
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              dt:
+                type: integer
+              main:
+                type: object
+                properties:
+                  aqi:
+                    type: integer
+              components:
+                type: object
+                properties:
+                  co:
+                    type: number
+                  no:
+                    type: number
+                  no2:
+                    type: number
+                  o3:
+                    type: number
+                  so2:
+                    type: number
+                  pm2_5:
+                    type: number
+                  pm10:
+                    type: number
+                  nh3:
+                    type: number
+    GeoLocation:
+      type: object
+      properties:
+        name:
+          type: string
+        local_names:
+          type: object
+          additionalProperties: true
+        lat:
+          type: number
+        lon:
+          type: number
+        country:
+          type: string
+        state:
+          type: string
+    ZipLocation:
+      type: object
+      properties:
+        zip:
+          type: string
+        name:
+          type: string
+        lat:
+          type: number
+        lon:
+          type: number
+        country:
+          type: string
+paths:
+  /data/2.5/weather:
+    get:
+      operationId: currentWeather
+      summary: Get current weather data for a location.
+      description: >
+        Access current weather data by city name, city ID, geographic
+        coordinates, or zip code. At least one location parameter must be
+        provided.
+      parameters:
+        - $ref: "#/components/parameters/appid"
+        - $ref: "#/components/parameters/q"
+        - $ref: "#/components/parameters/cityId"
+        - $ref: "#/components/parameters/lat"
+        - $ref: "#/components/parameters/lon"
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/units"
+        - $ref: "#/components/parameters/lang"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Weather"
+        "401":
+          description: Invalid API key
+        "404":
+          description: Location not found
+
+  /data/2.5/forecast:
+    get:
+      operationId: fiveDayForecast
+      summary: Get 5 day / 3 hour forecast data for a location.
+      parameters:
+        - $ref: "#/components/parameters/appid"
+        - $ref: "#/components/parameters/q"
+        - $ref: "#/components/parameters/cityId"
+        - $ref: "#/components/parameters/lat"
+        - $ref: "#/components/parameters/lon"
+        - $ref: "#/components/parameters/zip"
+        - $ref: "#/components/parameters/units"
+        - $ref: "#/components/parameters/lang"
+        - name: cnt
+          in: query
+          description: Number of timestamps to return, from the forecast API response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 40
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForecastList"
+        "401":
+          description: Invalid API key
+        "404":
+          description: Location not found
+
+  /data/2.5/air_pollution:
+    get:
+      operationId: currentAirPollution
+      summary: Get current air pollution data for a location.
+      parameters:
+        - $ref: "#/components/parameters/appid"
+        - $ref: "#/components/parameters/lat"
+        - $ref: "#/components/parameters/lon"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AirPollution"
+        "401":
+          description: Invalid API key
+
+  /data/2.5/air_pollution/forecast:
+    get:
+      operationId: airPollutionForecast
+      summary: Get air pollution forecast data for a location.
+      parameters:
+        - $ref: "#/components/parameters/appid"
+        - $ref: "#/components/parameters/lat"
+        - $ref: "#/components/parameters/lon"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AirPollution"
+        "401":
+          description: Invalid API key
+
+  /data/2.5/air_pollution/history:
+    get:
+      operationId: airPollutionHistory
+      summary: Get historical air pollution data for a location.
+      parameters:
+        - $ref: "#/components/parameters/appid"
+        - $ref: "#/components/parameters/lat"
+        - $ref: "#/components/parameters/lon"
+        - name: start
+          in: query
+          description: Start date (Unix time, UTC time zone).
+          required: true
+          schema:
+            type: integer
+        - name: end
+          in: query
+          description: End date (Unix time, UTC time zone).
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AirPollution"
+        "401":
+          description: Invalid API key
+
+  /geo/1.0/direct:
+    get:
+      operationId: geocodeDirect
+      summary: Convert a place name into geographic coordinates.
+      parameters:
+        - $ref: "#/components/parameters/appid"
+        - $ref: "#/components/parameters/q"
+        - name: limit
+          in: query
+          description: Number of results to return (up to 5).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GeoLocation"
+        "401":
+          description: Invalid API key
+
+  /geo/1.0/reverse:
+    get:
+      operationId: geocodeReverse
+      summary: Convert geographic coordinates into a place name.
+      parameters:
+        - $ref: "#/components/parameters/appid"
+        - $ref: "#/components/parameters/lat"
+        - $ref: "#/components/parameters/lon"
+        - name: limit
+          in: query
+          description: Number of results to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GeoLocation"
+        "401":
+          description: Invalid API key
+
+  /geo/1.0/zip:
+    get:
+      operationId: geocodeZip
+      summary: Convert a zip/post code into geographic coordinates.
+      parameters:
+        - $ref: "#/components/parameters/appid"
+        - $ref: "#/components/parameters/zip"
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZipLocation"
+        "401":
+          description: Invalid API key
