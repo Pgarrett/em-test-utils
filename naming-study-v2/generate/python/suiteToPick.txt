@@ -1,0 +1,30 @@
+Pick: themoviedb/EvoMaster_successes_Test.py
+
+  I checked all suites in python/{open-weather-api, paypal, spotify, spotify-v2, themoviedb, twilio, twilio-voice}. Most are repetitive by design — e.g. open-weather-api/paypal faults are 30-40 near-identical
+  returnsMismatchResponseWithSchema tests, and spotify/spotify-v2 "others" are dozens of tests that just check a 401/403/404 status code. twilio-voice only has 9 tests total (fails your 20+ bar).
+
+  themoviedb/EvoMaster_successes_Test.py is the outlier: 84 tests, but instead of shallow status checks, they assert deep on real TMDB response bodies (avg ~46 assert lines/test vs. 2–9 elsewhere, generated
+  2026-08-13). That variety in assertion content, not just endpoint names, is what makes it interesting.
+
+  20 standout tests from that file:
+
+  1. test_0_get_on_configuration_returns_object — walks nested images.backdrop_sizes/logo_sizes/poster_sizes arrays plus a 54-element change_keys list.
+  2. test_24_get_on_timezones_returns_249_elements — asserts exact count (249) of ISO timezone entries with per-entry zone names.
+  3. test_25_get_on_primary_translations_returns_144_elements — exact-length (144) locale list, alphabetically pinned values (af-ZA, ar-AE...).
+  4. test_26_get_on_languages_returns_187_elements — 187-element language list with quirky data (one entry has an empty name field — Fijian).
+  5. test_27_get_on_jobs_returns_12_elements — nested departments→jobs, with per-department job counts (83, 83, 5...) — a nested-array-length check.
+  6. test_28_get_on_countries_returns_251_elements — 251-country reference list, English + native names.
+  7. test_50_get_on_all_returns_object (/trending/all/week) — mixed movie/TV trending feed, asserts on media_type, genre IDs, popularity scores, live dated content ("The Odyssey", "Spider-Man: Brand New Day").
+  8. test_53_get_on_movie_credits_returns_object (person's movie_credits) — 16-entry cast list with full metadata per film (overview text, vote counts, character names, credit IDs).
+  9. test_66_get_on_movi_credits_returns_object — the inverse: a movie's cast/crew list.
+  10. test_72_get_on_tv_list_returns_object (/certification/tv/list) — country-keyed certification tables (NL, KR, RU...) each with rating codes + long-form legal meanings — ~540 lines of assertions.
+  11. test_73_get_on_list_returns_object (/certification/movie/list) — same shape for movies, ~577 lines.
+  12. test_78_get_on_providers_returns_object — a TV show with zero watch providers (results == empty) — an interesting negative/edge case amid all the rich-data ones.
+  13. test_79_get_on_providers_returns_object — a movie's watch-providers map: ~1,200 lines asserting per-country (AD, AE, AL...) streaming links, provider IDs, logos, display priority.
+  14. test_43_get_on_tv_credits_with_queryParam_empty_language_returns_object — exercises an empty language query param edge case, still returns full crew/department data.
+  15. test_20_get_on_movie_popular_with_queryParams_returns_object — paginated popular-movies list with query params.
+  16. test_48_get_on_trending_tv_with_queryParam_empty_language_returns_object — another empty-param edge case on trending TV.
+  17. test_63_get_on_movi_lists_with_queryParam_returns_object — user-created lists containing a movie.
+  18. test_83_get_on_favorite_tv_with_queryParams_empty_session_id_returns_object — empty session_id param, returns a legitimately empty results/total_results: 0 payload — a clean "empty but valid" edge case.
+  19. test_22_get_on_discover_tv_with_queryParams_include_null_first_air_dates_returns_object — discover endpoint with a boolean-ish include_null_first_air_dates filter.
+  20. test_23_get_on_discover_movie_with_queryParams_include_adult_empty_certification_country_returns_object — combines an include_adult flag with an empty certification_country param.
