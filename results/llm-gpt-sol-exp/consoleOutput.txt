@@ -1,0 +1,102 @@
+$ java -jar /run/datad/evoMaster/EvoMaster/core/target/evomaster.jar \
+  --outputFolder /run/datad/evoMaster/em-test-utils/results/llm-gpt-sol-exp \
+  --namingStrategy LLM \
+  --llm true \
+  --llmName gpt-5.6-sol \
+  --llmApiKey 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 \
+  --llmProvider OPENAI \
+  --llmTemperature 1 \
+  --blackBox false \
+  --writeStatistics true
+* 
+ _____          ___  ___          _
+|  ___|         |  \/  |         | |
+| |____   _____ | .  . | __ _ ___| |_ ___ _ __
+|  __\ \ / / _ \| |\/| |/ _` / __| __/ _ \ '__|
+| |___\ V / (_) | |  | | (_| \__ \ ||  __/ |
+\____/ \_/ \___/\_|  |_/\__,_|___/\__\___|_|
+
+                    
+* EvoMaster version: 6.2.1-SNAPSHOT
+* Loading configuration file from: /run/datad/evoMaster/EvoMaster/em.yaml
+* WARNING: You are modifying the value of some experimental settings. This is not recommended, as those settings might be just for work in progress features, not fully completed. Involved features: [llm, llmApiKey, llmName, llmProvider, llmTemperature]. For more information, see the documentation at: https://github.com/WebFuzzing/EvoMaster/blob/master/docs/options.md
+* WARNING: You are modifying the value of some internal settings. In general, this is not recommended, especially if it is first time you use EvoMaster, unless you are an experienced user. Involved features: [namingStrategy, writeStatistics]. Especially for beginners, you should only modify the 'important' settings: [base, blackBox, configPath, dtoForRequestPayload, endpointExclude, endpointFocus, endpointPrefix, endpointTagFilter, fieldsToSkipInAssertions, header0, header1, header2, maxTestsPerTestSuite, maxTime, outputFilePrefix, outputFileSuffix, outputFolder, outputFormat, overlay, overlayFileSuffixes, overlayLenient, overrideOpenAPIUrl, prematureStop, ratePerMinute, schema, sutControllerHost, sutControllerPort, testTimeout]. For more information, see the documentation at: https://github.com/WebFuzzing/EvoMaster/blob/master/docs/options.md
+* Initializing...
+* Connected LLM replies with: {"greeting":"Hello!"}
+* There are 11 usable RESTful API endpoints defined in the schema configuration
+* [WARNING] Some experimental settings have been activated. Those might not work as expected, or simply straight out crash. Furthermore, they might simply be incomplete features still under development. Activated experimental settings: [llm]
+* Starting phase SEARCH
+* Starting to generate test cases
+* Consumed search budget: 100.940%
+* Covered targets: 601
+* Time per test: 1437.0ms (1.0 actions)
+* Time since last improvement: 15s
+* Evaluated tests: 42get: 103.318%
+* Evaluated actions: 42
+* Needed budget: 73%7.0ms (1.0 actions)
+* Passed time (seconds): 61nt: 17s
+* Execution time per test (ms): Avg=1436.95 , min=1412.00 , max=1535.00
+* Execution time per action (ms): Avg=1436.95 , min=1412.00 , max=1535.00
+* Computation overhead between tests (ms): Avg=4.90 , min=1.00 , max=14.00
+* Computation overhead of resetting the SUT (ms): Avg=825.23 , min=821.00 , max=838.00
+* Computation overhead of fetching test results, per test, subset of targets (ms): Avg=426.56 , min=381.00 , max=451.00
+* Phase SEARCH lasted: 0h 1m 2s
+* Starting phase MINIMIZATION
+* Recomputing full coverage for 17 tests
+* No test to minimize
+* Phase MINIMIZATION lasted: 0h 0m 24s
+* Starting phase SECURITY
+* Phase 'SECURITY' has timed out after 6 seconds. If you can run the fuzzing for longer, next time you might want to either increase 'maxTime' (60s) or 'extraPhaseBudgetPercentage' (0.1)
+* Starting to apply HTTP oracle detection
+* Phase SECURITY lasted: 0h 0m 7s
+* Starting phase ADDITIONAL_ORACLES
+* Phase 'ADDITIONAL_ORACLES' has timed out after 6 seconds. If you can run the fuzzing for longer, next time you might want to either increase 'maxTime' (60s) or 'extraPhaseBudgetPercentage' (0.1)
+* Phase ADDITIONAL_ORACLES lasted: 0h 0m 7s
+* Starting phase WRITE_OUTPUT
+* Going to save 22 tests to /run/datad/evoMaster/em-test-utils/results/llm-gpt-sol-exp
+00:11:01.886 [main] WARN  dev.langchain4j.internal.RetryUtils - A retriable exception occurred. Remaining retries: 2 of 2
+dev.langchain4j.exception.TimeoutException: request timed out
+	at dev.langchain4j.http.client.jdk.JdkHttpClient.execute(JdkHttpClient.java:58)
+	at dev.langchain4j.model.openai.internal.SyncRequestExecutor.execute(SyncRequestExecutor.java:31)
+	at dev.langchain4j.model.openai.internal.RequestExecutor.executeRaw(RequestExecutor.java:61)
+	at dev.langchain4j.model.openai.OpenAiChatModel.lambda$doChat$0(OpenAiChatModel.java:167)
+	at dev.langchain4j.internal.ExceptionMapper.withExceptionMapper(ExceptionMapper.java:29)
+	at dev.langchain4j.internal.RetryUtils.lambda$withRetryMappingExceptions$1(RetryUtils.java:330)
+	at dev.langchain4j.internal.RetryUtils$RetryPolicy.withRetry(RetryUtils.java:208)
+	at dev.langchain4j.internal.RetryUtils.withRetry(RetryUtils.java:267)
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:330)
+	at dev.langchain4j.internal.RetryUtils.withRetryMappingExceptions(RetryUtils.java:313)
+	at dev.langchain4j.model.openai.OpenAiChatModel.doChat(OpenAiChatModel.java:166)
+	at dev.langchain4j.model.chat.ChatModel.chat(ChatModel.java:61)
+	at dev.langchain4j.model.chat.ChatModel.chat(ChatModel.java:36)
+	at dev.langchain4j.model.chat.ChatModel.chat(ChatModel.java:107)
+	at org.evomaster.core.llm.LlmSupport.chat(LlmSupport.kt:52)
+	at org.evomaster.core.llm.service.LlmService.chat(LlmService.kt:102)
+	at org.evomaster.core.output.naming.LlmServiceTestCaseNamingStrategy.getNewName(LlmServiceTestCaseNamingStrategy.kt:90)
+	at org.evomaster.core.output.naming.LlmServiceTestCaseNamingStrategy.generateLlmName(LlmServiceTestCaseNamingStrategy.kt:51)
+	at org.evomaster.core.output.naming.LlmServiceTestCaseNamingStrategy.expandName(LlmServiceTestCaseNamingStrategy.kt:44)
+	at org.evomaster.core.output.naming.TestCaseNamingStrategy.expandName$default(TestCaseNamingStrategy.kt:28)
+	at org.evomaster.core.output.naming.NumberedTestCaseNamingStrategy.generateNames(NumberedTestCaseNamingStrategy.kt:45)
+	at org.evomaster.core.output.naming.NumberedTestCaseNamingStrategy.getTestCases(NumberedTestCaseNamingStrategy.kt:19)
+	at org.evomaster.core.output.TestSuiteOrganizer.createSortedTestCases(TestSuiteOrganizer.kt:43)
+	at org.evomaster.core.output.service.TestSuiteWriter.convertToCompilableTestCode(TestSuiteWriter.kt:170)
+	at org.evomaster.core.Main$Companion.writeTests(Main.kt:1118)
+	at org.evomaster.core.Main$Companion.writeTests$default(Main.kt:1092)
+	at org.evomaster.core.Main$Companion.runAndPostProcess(Main.kt:285)
+	at org.evomaster.core.Main$Companion.initAndRun(Main.kt:238)
+	at org.evomaster.core.Main$Companion.main(Main.kt:142)
+	at org.evomaster.core.Main.main(Main.kt)
+Caused by: java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:571)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:123)
+	at dev.langchain4j.http.client.jdk.JdkHttpClient.execute(JdkHttpClient.java:49)
+	... 29 common frames omitted
+* Potential faults: 1
+* Covered targets (lines, branches, faults, etc.): 658
+* Bytecode line coverage: 56% (169 out of 301 in 13 units/classes)
+* Successfully executed (HTTP code 2xx) 11 endpoints out of 11 (100%)
+* You are using the default time budget '60s'. This is only for demo purposes.  You should increase such test budget. To obtain better results, use the '--maxTime' option to run the search for longer, like for example something between '1h' and '24h' hours.
+* Phase WRITE_OUTPUT lasted: 0h 2m 20s
+* Fuzzing session has finished
+* EvoMaster process has completed successfully
+* Use --help and visit https://www.evomaster.org to learn more about available options
